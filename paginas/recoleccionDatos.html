@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Recolección de Datos</title>
+</head>
+
+<body>
+    <main>
+        <div class="titulo">
+            <div class="partetitulo">
+                <h1>Calculemos tus calorias diarias</h1>
+                <p>Para hacerlo, necesitamos que nos suministres cierta información. :D</p>
+            </div>
+            <div class="partetitulo">
+                <h2>Tú gasto calórico diario es:</h2>
+                <p id="gastocalorico">---</p>
+                <p>calorias</p>
+                <button id="botonOculto" disabled style="display: none;"><a href="./diseñoDieta.html">¿Quieres una dieta específica?</a></button>
+                
+            </div>
+        </div>
+        <div class="formulario">
+            <form class="cajaformulario" id="formulariodatos">
+                <label for="pregunta1">Ingresa tu nombre:</label>
+                <input type="text" id="pregunta1" name="pregunta1"><br><br>
+
+                <label for="pregunta2">Ingresa tu edad:</label>
+                <input type="text" id="pregunta2" name="pregunta2"><br><br>
+
+                <label for="pregunta3">Ingresa tu estatura en centimetros. ejemplo:(174):</label>
+                <input type="text" id="pregunta3" name="pregunta3"><br><br>
+
+                <label for="pregunta4">Ingresa tu peso en kilogramos. ejemplo:(75):</label>
+                <input type="text" id="pregunta4" name="pregunta4"><br><br>
+
+                <label for="pregunta5">¿Eres hombre o mujer?:</label>
+                <select id="pregunta5" name="pregunta3">
+                    <option value="H">Hombre</option>
+                    <option value="M">Mujer</option>
+                </select><br><br>
+
+                <label for="pregunta6">¿Qué tanta actividad fisica realizas a la semana?:</label>
+                <select id="pregunta6" name="pregunta6">
+                    <option value="sedentario">Sedentario</option>
+                    <option value="ligero">Ligero</option>
+                    <option value="moderado">Moderado</option>
+                    <option value="intenso">Intenso</option>
+                    <option value="muyintenso">Muy intenso</option>
+                </select><br><br>
+
+                <p>¡Muchas gracias por tu colaboración!</p>
+
+                <input id="activarBoton" type="submit" value="Enviar respuestas">
+            </form>
+        </div>
+
+    </main>
+
+
+
+
+    <footer>
+        <p>Programa hecho por Oscar Agreda: <a href="https://www.linkedin.com/in/oscar-ortiz-597179172/">Perfil de
+                LinkedIn</a></p>
+    </footer>
+    <script src="../main.js"></script>
+</body>
+
+</html>
