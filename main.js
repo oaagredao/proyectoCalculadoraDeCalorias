@@ -5,6 +5,8 @@
 // Declaro TDEE y variables globales
 var TDEE, nombre, edad, estatura, peso, sexo, ejercicio,IndiceMasaCorporal;
 
+// declaro variable que lleva el conteo de calorias del desayuno
+let caloriasDesayuno=0;
 
 //Defino las funciones
 
@@ -157,17 +159,17 @@ else if (document.title === "bajarPeso") {
     // debo crear un array de objetos que tenga la lista de alimentos en el desayuno y use el metodo find para comparar cual es el nombre del alimento ingresdao en el html y sacar el valor de las calorias del objeto
 
     // crear el array de objetos alimentos desayuno
-    const listaAlimentosDesayuno=[{ nombre: " Pan Integral", tipoalimento: "Harina", calorias: "100" },
-    { nombre: "1 Tortilla de harina", tipoalimento: "Harina", calorias: "80" },
-    { nombre: "Arepas de maiz", tipoalimento: "Harina", calorias: "150" },
-    { nombre: "Huevos", tipoalimento: "Proteinas", calorias: "70" },
-    { nombre: "Yogurt griego", tipoalimento: "Proteinas", calorias: "120" },
-    { nombre: "tofu", tipoalimento: "Proteinas", calorias: "90" },
-    { nombre: "Frutos secos", tipoalimento: "Proteinas", calorias: "160" },
-    { nombre: "Leche de vaca", tipoalimento: "Proteinas", calorias: "90" },
-    { nombre: "Leche de soya", tipoalimento: "Proteinas", calorias: "100" },
-    { nombre: "aceite de oliva", tipoalimento: "Grasa", calorias: "120" },
-    { nombre: "aguacate", tipoalimento: "Grasa", calorias: "160" }
+    const listaAlimentosDesayuno=[{ nombre: "1 Pan Integral (Harina)", tipoalimento: "Harina", calorias: "100" },
+    { nombre: "1 Tortilla de harina (Harina)", tipoalimento: "Harina", calorias: "80" },
+    { nombre: "Arepas de maiz (Harina)", tipoalimento: "Harina", calorias: "150" },
+    { nombre: "Huevos (Proteinas)", tipoalimento: "Proteinas", calorias: "70" },
+    { nombre: "Yogurt griego (Proteinas)", tipoalimento: "Proteinas", calorias: "120" },
+    { nombre: "tofu (Proteinas)", tipoalimento: "Proteinas", calorias: "90" },
+    { nombre: "Frutos secos (Proteinas)", tipoalimento: "Proteinas", calorias: "160" },
+    { nombre: "Leche de vaca (Proteinas)", tipoalimento: "Proteinas", calorias: "90" },
+    { nombre: "Leche de soya (Proteinas)", tipoalimento: "Proteinas", calorias: "100" },
+    { nombre: "aceite de oliva (Grasa)", tipoalimento: "Grasa", calorias: "120" },
+    { nombre: "aguacate (Grasa)", tipoalimento: "Grasa", calorias: "160" }
   ];
 
 
@@ -182,14 +184,13 @@ else if (document.title === "bajarPeso") {
     // al hacer click quiero que traiga el alimento que está en el select, la opcion de desayuno
     let alimentoDesayunoSeleccionado=document.getElementById("preguntaOpcionesDesayuno").value;
 
-    // declaro variable que lleva el conteo de calorias del desayuno
-    const caloriasDesayuno=0;
+    
 
 
     let objetoAlimentoDesayuno=[];
     // comparo en el array cual objeto tiene ese alimento
     listaAlimentosDesayuno.forEach(item=>{
-        if(item.includes(alimentoDesayunoSeleccionado)){
+        if(item.nombre==alimentoDesayunoSeleccionado){
             // mi idea es que aqui se recupere el objeto y se busque del objeto las calorias 
             // le envio el objeto que cumple con las caracteristicas al array objetoAlimentoDesayuno
             objetoAlimentoDesayuno.push(item);
@@ -203,7 +204,15 @@ else if (document.title === "bajarPeso") {
 
         if(caloriasDesayuno<caloriasMaximasDesayuno){
             // traigo al objeto alimento desayuno que está en el array y le asigno el valor de las calorias a una variable
-            let caloriasEspecificasAlimentoDesayuno=objetoAlimentoDesayuno[0].calorias;
+            let caloriasEspecificasAlimentoDesayuno=parseInt(objetoAlimentoDesayuno[0].calorias);
+            
+
+            console.log("Las calorias especificas del alimento son:");
+            console.log(caloriasEspecificasAlimentoDesayuno);
+            console.log("Las calorias desayuno son");
+            console.log(caloriasDesayuno);
+
+
 
             // le sumo el valor de las calorias del alimento al contador de calorias de desayuno
             caloriasDesayuno=caloriasDesayuno+caloriasEspecificasAlimentoDesayuno;
@@ -216,8 +225,17 @@ else if (document.title === "bajarPeso") {
             // reseteo el objetoAlimentoDesayuno para que no contenga nada otravez y pueda acumular un nuevo
             objetoAlimentoDesayuno=[];
 
-            // reseteo el contador que va sumando las calorias del desayuno
-            caloriasDesayuno=0;
+            // aparece una alert para indicar que ya se tiene las calorias del desayuno
+            alert(`Ya has alcanzado la cantidad de calorias recomendada para esta comida`)
+            alert(`Las calorias de tu desayuno son: ${caloriasDesayuno}`)
+
+            console.log("Las calorias finales  de desayuno son");
+            console.log(caloriasDesayuno);
+
+
+
+
+
         }
     
   })
