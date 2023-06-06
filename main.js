@@ -728,7 +728,7 @@ else if (document.title === "bajarPeso") {
             alert(`Las calorías de tu Cena son: ${caloriasCena}`);
         }
     });
-
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     // DEBO MOSTRAR LA DIETA HECHA POR EL USUARIO
     // hay 5 vectores de objetos con los alimentos agregados por el usuario, debo mostrarlos por pantalla
@@ -809,8 +809,660 @@ else if (document.title === "bajarPeso") {
             mostrarNombresAlimentosCena += " "+item.nombre + "--";
         });
         pAlimentosCena.textContent = `Tus alimentos de cena son: ${mostrarNombresAlimentosCena}`;
-
+        
 
     })
     // este es el if de pagina bajar peso
+}
+else if (document.title === "SubirPeso") {
+    //obtenfo el p para mostrar las calorias que se quitarán de la dieta (el deficit calorico)
+    const parrafoDeficitCaloricoSubirPeso = document.getElementById("deficitCaloricoSubirPeso");
+    // obtengo el p para mostrar las calorias que se consumirán
+    const parrafoCaloriasDietaSubirPeso = document.getElementById("caloriasConsumirDietaSubirPeso");
+
+    // calculo el indice de masa corporal llamando a la funcion que lo calcula
+    const indiceMasaCorporalSubirPeso = IMC(peso, estatura);
+
+    let deficitCaloricoSubirPeso;
+
+    // llamamos el valor del TDEE del local storage
+    TDEE = localStorage.getItem("TDEE");
+    // tomo una accion u otra dependiendo de que resultado de indice de masa corporal se obtiene
+    if (indiceMasaCorporalSubirPeso >40) {
+        deficitCaloricoSubirPeso = 0;
+        parrafoCaloriasDietaSubirPeso.textContent = "No es recomendable que subas de peso";
+    } else {
+        deficitCaloricoSubirPeso = 300;
+        parrafoCaloriasDietaSubirPeso.textContent = `${TDEE + deficitCaloricoSubirPeso} calorías`;
+    }
+    // le asigno el valor del deficit calorico al parrafo que muestra el deficit calorico
+    parrafoDeficitCaloricoSubirPeso.textContent = `El supéravit calórico que vamos a manejar será de: ${deficitCaloricoSubirPeso} calorias`;
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // DESAYUNOS
+    // debo crear un array de objetos que tenga la lista de alimentos en el desayuno y use el metodo find para comparar cual es el nombre del alimento ingresdao en el html y sacar el valor de las calorias del objeto
+
+    // crear el array de objetos alimentos desayuno
+    const listaAlimentosDesayunosSubirPeso = [{ nombre: "1 Pan Integral (Harina)", tipoalimento: "Harina", calorias: "100" },
+    { nombre: "1 Tortilla de harina (Harina)", tipoalimento: "Harina", calorias: "80" },
+    { nombre: "Arepas de maiz (Harina)", tipoalimento: "Harina", calorias: "150" },
+    { nombre: "Huevos (Proteinas)", tipoalimento: "Proteinas", calorias: "70" },
+    { nombre: "Yogurt griego (Proteinas)", tipoalimento: "Proteinas", calorias: "120" },
+    { nombre: "tofu (Proteinas)", tipoalimento: "Proteinas", calorias: "90" },
+    { nombre: "Frutos secos (Proteinas)", tipoalimento: "Proteinas", calorias: "160" },
+    { nombre: "Leche de vaca (Proteinas)", tipoalimento: "Proteinas", calorias: "90" },
+    { nombre: "Leche de soya (Proteinas)", tipoalimento: "Proteinas", calorias: "100" },
+    { nombre: "aceite de oliva (Grasa)", tipoalimento: "Grasa", calorias: "120" },
+    { nombre: "aguacate (Grasa)", tipoalimento: "Grasa", calorias: "160" }
+    ];
+
+    // creo el array que irá almacenando los objetos seleccionados por el usuario para imprimirlos al final como la dieta
+    let listaAlimentosDesayunoAgregadosUsuarioSubirPeso = [];
+
+    // debo agregar un evento al boton de enviar de los alimentos del desayuno
+    // obtener el boton de enviar alimentos desayuno
+    const botonDeListaAlimentosDesayuno = document.getElementById("botonAlimentosDesayunoSubirPeso");
+
+    // agrego el evento al boton
+    botonDeListaAlimentosDesayuno.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // al hacer click quiero que traiga el alimento que está en el select, la opcion de desayuno
+        let alimentoDesayunoSeleccionado = document.getElementById("preguntaOpcionesDesayunoSubirPeso").value;
+        let objetoAlimentoDesayuno = [];
+        // comparo en el array cual objeto tiene ese alimento
+        listaAlimentosDesayunosSubirPeso.forEach(item => {
+            if (item.nombre == alimentoDesayunoSeleccionado) {
+                // mi idea es que aqui se recupere el objeto y se busque del objeto las calorias 
+                // le envio el objeto que cumple con las caracteristicas al array objetoAlimentoDesayuno
+                objetoAlimentoDesayuno.push(item);
+
+                // le envio el objeto que cumple con los datos del nombre del alimento ingresado en el html al array de objetos que servirá como lista final de la dieta desayuno
+                listaAlimentosDesayunoAgregadosUsuarioSubirPeso.push(item);
+            }
+        });
+        // debo sacar las calorias almacenadas en el objeto y sumarlas a una variable de suma de calorias de desayuno, esta variable debe tener un if para asegurarse que no se pase de cierto valor
+
+        // hago el if que me deja sumar las calorias del alimento que ingrese, si no se ha alcanzado la cantidad de calorias establecida para el desayuno
+        // esto indica que el desayuno no puede ser mayor del 20% del TDEE
+        let caloriasMaximasDesayuno = TDEE * 0.20;
+
+        if (caloriasDesayuno < caloriasMaximasDesayuno) {
+            // traigo al objeto alimento desayuno que está en el array y le asigno el valor de las calorias a una variable
+            let caloriasEspecificasAlimentoDesayuno = parseInt(objetoAlimentoDesayuno[0].calorias);
+
+            // le sumo el valor de las calorias del alimento al contador de calorias de desayuno
+            caloriasDesayuno = caloriasDesayuno + caloriasEspecificasAlimentoDesayuno;
+
+            // Muestro una alerta que me diga cuanto llevo de calorias acumuladas
+            alert(`¡Llevas ${caloriasDesayuno} calorias de desayuno!`)
+
+            // reseteo el objetoAlimentoDesayuno para que no contenga nada otravez y pueda acumular un nuevo alimento
+            objetoAlimentoDesayuno = [];
+        }
+        else if (caloriasDesayuno >= caloriasMaximasDesayuno) {
+            // en el caso que se haya alcanzado las calorias maximas del desayuno
+            // reseteo el objetoAlimentoDesayuno para que no contenga nada otravez y pueda acumular un nuevo
+            objetoAlimentoDesayuno = [];
+
+            // aparece una alert para indicar que ya se tiene las calorias del desayuno
+            alert(`Ya has alcanzado la cantidad de calorias recomendada para esta comida`)
+            alert(`Las calorias de tu desayuno son: ${caloriasDesayuno}`)
+        }
+    })
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // MEDIA MAÑANA
+
+    // creo el vector de objetos que contiene los datos de los alimentos a elegir en la media mañana
+    const listaAlimentosMediaMañanaSubirPeso = [{
+        nombre: "1 Pan Integral (Harina)",
+        tipoalimento: "Harina",
+        calorias: 100
+    },
+    {
+        nombre: "Porción de Fruta",
+        tipoalimento: "Fruta",
+        calorias: 50
+    },
+    {
+        nombre: "Yogurt Griego",
+        tipoalimento: "Proteina",
+        calorias: 120
+    },
+    {
+        nombre: "Frutos Secos",
+        tipoalimento: "Proteina",
+        calorias: 150
+    },
+    {
+        nombre: "3 Galletas Integrales",
+        tipoalimento: "Harina",
+        calorias: 80
+    }]
+
+
+    // creo el array que irá almacenando los objetos seleccionados por el usuario para imprimirlos al final como la dieta
+    let listaAlimentosMediaMañanaAgregadosUsuarioSubirPeso = [];
+
+    // debo agregar un evento al boton de enviar de los alimentos del desayuno
+    // obtener el boton de enviar alimentos desayuno
+    const botonDeListaAlimentosMediaMañana = document.getElementById("botonAlimentosMediaMañanaSubirPeso");
+
+    // agrego el evento al boton
+    botonDeListaAlimentosMediaMañana.addEventListener("click", function (event) {
+        // previene que el formulario recargue la pagina
+        event.preventDefault();
+
+        // al hacer click quiero que traiga el alimento que está en el select, la opcion de media Mañana
+        let alimentoMediaMañanaSeleccionado = document.getElementById("preguntaOpcionesMediaMañanaSubirPeso").value;
+
+        let objetoAlimentoMediaMañana = [];
+        // comparo en el array cual objeto tiene ese alimento
+        listaAlimentosMediaMañanaSubirPeso.forEach(item => {
+            if (item.nombre == alimentoMediaMañanaSeleccionado) {
+                // mi idea es que aqui se recupere el objeto y se busque del objeto las calorias 
+                // le envio el objeto que cumple con las caracteristicas al array objetoAlimentoMediaMañana
+                objetoAlimentoMediaMañana.push(item);
+
+                // le envio el objeto que cumple con los datos del nombre del alimento ingresado en el html al array de objetos que servirá como lista final de la dieta media mañana
+                listaAlimentosMediaMañanaAgregadosUsuarioSubirPeso.push(item);
+            }
+        });
+
+        // debo sacar las calorias almacenadas en el objeto y sumarlas a una variable de suma de calorias de media mañana, esta variable debe tener un if para asegurarse que no se pase de cierto valor
+
+        // hago el if que me deja sumar las calorias del alimento que ingrese, si no se ha alcanzado la cantidad de calorias establecida para la media mañana
+        // esto indica que la media mañana no puede ser mayor del 15% del TDEE
+        let caloriasMaximasMediaMañana = TDEE * 0.15;
+
+        if (caloriasMediaMañana < caloriasMaximasMediaMañana) {
+            // traigo al objeto alimento media mañana que está en el array y le asigno el valor de las calorias a una variable
+            let caloriasEspecificasAlimentoMediaMañana = parseInt(objetoAlimentoMediaMañana[0].calorias);
+
+            // le sumo el valor de las calorias del alimento al contador de calorias de media mañana
+            caloriasMediaMañana = caloriasMediaMañana + caloriasEspecificasAlimentoMediaMañana;
+
+            // Muestro una alerta que me diga cuanto llevo de calorias acumuladas
+            alert(`¡Llevas ${caloriasMediaMañana} calorias de media mañana!`)
+
+            // reseteo el objetoAlimentoDesayuno para que no contenga nada otravez y pueda acumular un nuevo alimento
+            objetoAlimentoMediaMañana = [];
+        }
+        else if (caloriasMediaMañana >= caloriasMaximasMediaMañana) {
+            // en el caso que se haya alcanzado las calorias maximas de la media mañana
+            // reseteo el objetoAlimentoMediaMañana para que no contenga nada otravez y pueda acumular un nuevo
+            objetoAlimentoMediaMañana = [];
+
+            // aparece una alert para indicar que ya se tiene las calorias del desayuno
+            alert(`Ya has alcanzado la cantidad de calorias recomendada para esta comida`)
+            alert(`Las calorias de tu media mañana son: ${caloriasMediaMañana}`)
+        }
+    })
+     ////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ALMUERZO
+
+    // creo el vector de objetos que contiene los alimentos a alegir de almuerzo
+    const listaAlimentosAlmuerzoSubirPeso = [
+        {
+            nombre: "Porción de Pollo",
+            tipoalimento: "Proteína",
+            calorias: 200
+        },
+        {
+            nombre: "Porción de Carne de Res",
+            tipoalimento: "Proteína",
+            calorias: 250
+        },
+        {
+            nombre: "Porción de Carne de Cerdo",
+            tipoalimento: "Proteína",
+            calorias: 300
+        },
+        {
+            nombre: "Porción de Papa Asada",
+            tipoalimento: "Harina",
+            calorias: 150
+        },
+        {
+            nombre: "Porción de Arroz",
+            tipoalimento: "Harina",
+            calorias: 180
+        },
+        {
+            nombre: "Porción de Ensalada de Lechuga con Zanahoria",
+            tipoalimento: "Vegetal",
+            calorias: 50
+        },
+        {
+            nombre: "Porción de Ensalada de Tomate con Cebolla",
+            tipoalimento: "Vegetal",
+            calorias: 60
+        },
+        {
+            nombre: "Porción de Lentejas",
+            tipoalimento: "Proteina",
+            calorias: 120
+        },
+        {
+            nombre: "Porción de Plátanos Fritos",
+            tipoalimento: "Harina",
+            calorias: 160
+        },
+        {
+            nombre: "Sopa de Frijoles",
+            tipoalimento: "Proteina",
+            calorias: 100
+        },
+        {
+            nombre: "Sopa de Avena",
+            tipoalimento: "Harina",
+            calorias: 80
+        },
+        {
+            nombre: "Sopa de Maíz",
+            tipoalimento: "Harina",
+            calorias: 90
+        },
+        {
+            nombre: "Porción de Pasta",
+            tipoalimento: "Harina",
+            calorias: 200
+        },
+        {
+            nombre: "Porción de Tofu",
+            tipoalimento: "Proteína",
+            calorias: 150
+        },
+        {
+            nombre: "Porción de Proteína de Soya",
+            tipoalimento: "Proteína",
+            calorias: 180
+        },
+        {
+            nombre: "Porción de Salmón",
+            tipoalimento: "Proteína",
+            calorias: 220
+        },
+        {
+            nombre: "Porción de Ensalada Mixta",
+            tipoalimento: "Vegetal",
+            calorias: 70
+        }
+    ];
+
+    // Creo el array que irá almacenando los objetos seleccionados por el usuario para imprimirlos al final como la dieta
+    let listaAlimentosAlmuerzoAgregadosUsuarioSubirPeso = [];
+
+    // Debo agregar un evento al botón de enviar de los alimentos del almuerzo
+    // Obtener el botón de enviar alimentos del almuerzo
+    const botonDeListaAlimentosAlmuerzo = document.getElementById("botonAlimentosAlmuerzoSubirPeso");
+
+    // Agrego el evento al botón
+    botonDeListaAlimentosAlmuerzo.addEventListener("click", function (event) {
+        // Previene que el formulario recargue la página
+        event.preventDefault();
+
+        // Al hacer clic quiero que traiga el alimento que está en el select, la opción de Almuerzo
+        let alimentoAlmuerzoSeleccionado = document.getElementById("preguntaOpcionesAlmuerzoSubirPeso").value;
+
+        let objetoAlimentoAlmuerzo = [];
+        // Comparo en el array cuál objeto tiene ese alimento
+        listaAlimentosAlmuerzoSubirPeso.forEach((item) => {
+            if (item.nombre == alimentoAlmuerzoSeleccionado) {
+                // Envío el objeto que cumple con las características al array objetoAlimentoAlmuerzo
+                objetoAlimentoAlmuerzo.push(item);
+
+                // Envío el objeto que cumple con los datos del nombre del alimento ingresado en el HTML al array de objetos que servirá como lista final de la dieta de Almuerzo
+                listaAlimentosAlmuerzoAgregadosUsuarioSubirPeso.push(item);
+            }
+        });
+
+        // Debo sacar las calorías almacenadas en el objeto y sumarlas a una variable de suma de calorías de Almuerzo, esta variable debe tener un if para asegurarse de que no se pase de cierto valor
+
+        // Hago el if que me permite sumar las calorías del alimento que ingresé, si no se ha alcanzado la cantidad de calorías establecida para el Almuerzo
+        // Esto indica que el Almuerzo no puede ser mayor al 40% del TDEE
+        let caloriasMaximasAlmuerzo = TDEE * 0.3;
+
+        if (caloriasAlmuerzo < caloriasMaximasAlmuerzo) {
+            // Traigo el objeto de Alimento del Almuerzo que está en el array y le asigno el valor de las calorías a una variable
+            let caloriasEspecificasAlimentoAlmuerzo = parseInt(objetoAlimentoAlmuerzo[0].calorias);
+
+            // Sumo el valor de las calorías del alimento al contador de calorías del Almuerzo
+            caloriasAlmuerzo = caloriasAlmuerzo + caloriasEspecificasAlimentoAlmuerzo;
+
+            // Muestro una alerta que me indique cuántas calorías se llevan acumuladas
+            alert(`¡Llevas ${caloriasAlmuerzo} calorías de Almuerzo!`);
+
+            // Reseteo el objetoAlimentoAlmuerzo para que no contenga nada y pueda acumular un nuevo alimento
+            objetoAlimentoAlmuerzo = [];
+        } else if (caloriasAlmuerzo >= caloriasMaximasAlmuerzo) {
+            // En caso de que se haya alcanzado el límite máximo de calorías para el Almuerzo
+            // Reseteo el objetoAlimentoAlmuerzo para que no contenga nada y pueda acumular un nuevo alimento
+            objetoAlimentoAlmuerzo = [];
+
+            // Muestro una alerta indicando que ya se ha alcanzado la cantidad recomendada de calorías para esta comida
+            alert(`Ya has alcanzado la cantidad de calorías recomendada para esta comida.`);
+            alert(`Las calorías de tu Almuerzo son: ${caloriasAlmuerzo}`);
+        }
+    });
+
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // MEDIA TARDE
+    // creo el vector de objetos que tiene la lista de objetos de alimentos a legir de media tarde
+
+    const listaAlimentosMediaTardeSubirPeso = [{
+        nombre: "Yogurt Griego",
+        tipoalimento: "Proteina",
+        calorias: 150
+    },
+    {
+        nombre: "Pan Integral",
+        tipoalimento: "Harina",
+        calorias: 100
+    },
+    {
+        nombre: "Leche de Soya",
+        tipoalimento: "Proteina",
+        calorias: 90
+    },
+    {
+        nombre: "Cuajada",
+        tipoalimento: "Proteina",
+        calorias: 80
+    },
+    {
+        nombre: "Porción de Fruta",
+        tipoalimento: "Fruta",
+        calorias: 50
+    },
+    {
+        nombre: "Galletas Integrales",
+        tipoalimento: "Harina",
+        calorias: 70
+    },
+    {
+        nombre: "Frutos Secos",
+        tipoalimento: "Proteina",
+        calorias: 200
+    }];
+
+    // Creo el array que irá almacenando los objetos seleccionados por el usuario para imprimirlos al final como la dieta
+    let listaAlimentosMediaTardeAgregadosUsuarioSubirPeso = [];
+
+    // Debo agregar un evento al botón de enviar de los alimentos de la media tarde
+    // Obtener el botón de enviar alimentos de la media tarde
+    const botonDeListaAlimentosMediaTarde = document.getElementById("botonAlimentosMediaTardeSubirPeso");
+
+    // Agrego el evento al botón
+    botonDeListaAlimentosMediaTarde.addEventListener("click", function (event) {
+        // Previene que el formulario recargue la página
+        event.preventDefault();
+
+        // Al hacer clic quiero que traiga el alimento que está en el select, la opción de MediaTarde
+        let alimentoMediaTardeSeleccionado = document.getElementById("preguntaOpcionesMediaTardeSubirPeso").value;
+
+        let objetoAlimentoMediaTarde = [];
+        // Comparo en el array cuál objeto tiene ese alimento
+        listaAlimentosMediaTardeSubirPeso.forEach((item) => {
+            if (item.nombre == alimentoMediaTardeSeleccionado) {
+                // Envío el objeto que cumple con las características al array objetoAlimentoMediaTarde
+                objetoAlimentoMediaTarde.push(item);
+
+                // Envío el objeto que cumple con los datos del nombre del alimento ingresado en el HTML al array de objetos que servirá como lista final de la dieta de MediaTarde
+                listaAlimentosMediaTardeAgregadosUsuarioSubirPeso.push(item);
+            }
+        });
+
+        // Debo sacar las calorías almacenadas en el objeto y sumarlas a una variable de suma de calorías de MediaTarde, esta variable debe tener un if para asegurarse de que no se pase de cierto valor
+
+        // Hago el if que me permite sumar las calorías del alimento que ingresé, si no se ha alcanzado la cantidad de calorías establecida para la MediaTarde
+        // Esto indica que la MediaTarde no puede ser mayor al 40% del TDEE
+        let caloriasMaximasMediaTarde = TDEE * 0.15;
+
+        if (caloriasMediaTarde < caloriasMaximasMediaTarde) {
+            // Traigo el objeto de Alimento de MediaTarde que está en el array y le asigno el valor de las calorías a una variable
+            let caloriasEspecificasAlimentoMediaTarde = parseInt(objetoAlimentoMediaTarde[0].calorias);
+
+            // Sumo el valor de las calorías del alimento al contador de calorías de MediaTarde
+            caloriasMediaTarde = caloriasMediaTarde + caloriasEspecificasAlimentoMediaTarde;
+
+            // Muestro una alerta que me indique cuántas calorías se llevan acumuladas
+            alert(`¡Llevas ${caloriasMediaTarde} calorías de MediaTarde!`);
+
+            // Reseteo el objetoAlimentoMediaTarde para que no contenga nada y pueda acumular un nuevo alimento
+            objetoAlimentoMediaTarde = [];
+        } else if (caloriasMediaTarde >= caloriasMaximasMediaTarde) {
+            // En caso de que se haya alcanzado el límite máximo de calorías para la MediaTarde
+            // Reseteo el objetoAlimentoMediaTarde para que no contenga nada y pueda acumular un nuevo alimento
+            objetoAlimentoMediaTarde = [];
+
+            // Muestro una alerta indicando que ya se ha alcanzado la cantidad recomendada de calorías para esta comida
+            alert(`Ya has alcanzado la cantidad de calorías recomendada para esta comida.`);
+            alert(`Las calorías de tu MediaTarde son: ${caloriasMediaTarde}`);
+        }
+    });
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CENA
+    const listaAlimentosCenaSubirPeso = [
+        {
+            nombre: "Porción de Pollo",
+            tipoalimento: "Proteína",
+            calorias: 200
+        },
+        {
+            nombre: "Porción de Carne de Res",
+            tipoalimento: "Proteína",
+            calorias: 250
+        },
+        {
+            nombre: "Porción de Carne de Cerdo",
+            tipoalimento: "Proteína",
+            calorias: 300
+        },
+        {
+            nombre: "Porción de Papa Asada",
+            tipoalimento: "Harina",
+            calorias: 150
+        },
+        {
+            nombre: "Porción de Arroz",
+            tipoalimento: "Harina",
+            calorias: 180
+        },
+        {
+            nombre: "Porción de Ensalada de Lechuga con Zanahoria",
+            tipoalimento: "Vegetal",
+            calorias: 50
+        },
+        {
+            nombre: "Porción de Ensalada de Tomate con Cebolla",
+            tipoalimento: "Vegetal",
+            calorias: 60
+        },
+        {
+            nombre: "Porción de Lentejas",
+            tipoalimento: "Proteina",
+            calorias: 120
+        },
+        {
+            nombre: "Porción de Plátanos Fritos",
+            tipoalimento: "Harina",
+            calorias: 160
+        },
+        {
+            nombre: "Sopa de Frijoles",
+            tipoalimento: "Proteina",
+            calorias: 100
+        },
+        {
+            nombre: "Sopa de Avena",
+            tipoalimento: "Harina",
+            calorias: 80
+        },
+        {
+            nombre: "Sopa de Maíz",
+            tipoalimento: "Harina",
+            calorias: 90
+        },
+        {
+            nombre: "Porción de Pasta",
+            tipoalimento: "Harina",
+            calorias: 200
+        },
+        {
+            nombre: "Porción de Tofu",
+            tipoalimento: "Proteína",
+            calorias: 150
+        },
+        {
+            nombre: "Porción de Proteína de Soya",
+            tipoalimento: "Proteína",
+            calorias: 180
+        },
+        {
+            nombre: "Porción de Salmón",
+            tipoalimento: "Proteína",
+            calorias: 220
+        },
+        {
+            nombre: "Porción de Ensalada Mixta",
+            tipoalimento: "Vegetal",
+            calorias: 70
+        }
+    ];
+
+    // Creo el array que irá almacenando los objetos seleccionados por el usuario para imprimirlos al final como la dieta
+    let listaAlimentosCenaAgregadosUsuarioSubirPeso = [];
+
+    // Debo agregar un evento al botón de enviar de los alimentos de la cena
+    // Obtener el botón de enviar alimentos de la cena
+    const botonDeListaAlimentosCena = document.getElementById("botonAlimentosCenaSubirPeso");
+
+    // Agrego el evento al botón
+    botonDeListaAlimentosCena.addEventListener("click", function (event) {
+        // Previene que el formulario recargue la página
+        event.preventDefault();
+
+        // Al hacer clic quiero que traiga el alimento que está en el select, la opción de Cena
+        let alimentoCenaSeleccionado = document.getElementById("preguntaOpcionesCenaSubirPeso").value;
+
+        let objetoAlimentoCena = [];
+        // Comparo en el array cuál objeto tiene ese alimento
+        listaAlimentosCenaSubirPeso.forEach((item) => {
+            if (item.nombre == alimentoCenaSeleccionado) {
+                // Envío el objeto que cumple con las características al array objetoAlimentoCena
+                objetoAlimentoCena.push(item);
+
+                // Envío el objeto que cumple con los datos del nombre del alimento ingresado en el HTML al array de objetos que servirá como lista final de la dieta de Cena
+                listaAlimentosCenaAgregadosUsuarioSubirPeso.push(item);
+            }
+        });
+
+        // Debo sacar las calorías almacenadas en el objeto y sumarlas a una variable de suma de calorías de Cena, esta variable debe tener un if para asegurarse de que no se pase de cierto valor
+
+        // Hago el if que me permite sumar las calorías del alimento que ingresé, si no se ha alcanzado la cantidad de calorías establecida para la Cena
+        // Esto indica que la Cena no puede ser mayor al 40% del TDEE
+        let caloriasMaximasCena = TDEE * 0.3;
+
+        if (caloriasCena < caloriasMaximasCena) {
+            // Traigo el objeto de Alimento de Cena que está en el array y le asigno el valor de las calorías a una variable
+            let caloriasEspecificasAlimentoCena = parseInt(objetoAlimentoCena[0].calorias);
+
+            // Sumo el valor de las calorías del alimento al contador de calorías de Cena
+            caloriasCena = caloriasCena + caloriasEspecificasAlimentoCena;
+
+            // Muestro una alerta que me indique cuántas calorías se llevan acumuladas
+            alert(`¡Llevas ${caloriasCena} calorías de Cena!`);
+
+            // Reseteo el objetoAlimentoCena para que no contenga nada y pueda acumular un nuevo alimento
+            objetoAlimentoCena = [];
+        } else if (caloriasCena >= caloriasMaximasCena) {
+            // En caso de que se haya alcanzado el límite máximo de calorías para la Cena
+            // Reseteo el objetoAlimentoCena para que no contenga nada y pueda acumular un nuevo alimento
+            objetoAlimentoCena = [];
+
+            // Muestro una alerta indicando que ya se ha alcanzado la cantidad recomendada de calorías para esta comida
+            alert(`Ya has alcanzado la cantidad de calorías recomendada para esta comida.`);
+            alert(`Las calorías de tu Cena son: ${caloriasCena}`);
+        }
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    // DEBO MOSTRAR LA DIETA HECHA POR EL USUARIO
+    // hay 5 vectores de objetos con los alimentos agregados por el usuario, debo mostrarlos por pantalla
+
+    // obtengo el boton de mostrar dieta del html
+    const btnMostrarDieta = document.getElementById("botonMostrarDietaSubirPeso");
+    // agrego un evento para que se empiecen a mostrar los alimentos 
+    btnMostrarDieta.addEventListener("click", function (event) {
+        // crear un div con una clase oculta que se revele cuando oprima el boton, luego mostrar los datos en ese div
+        // obtengo el div con la clase oculta
+        const divMostrarDieta = document.getElementById("divMostrarDietaSubirPeso");
+        // remover la clase "oculta"
+        divMostrarDieta.classList.remove("oculto");
+
+
+        // MOSTRAR LISTA DESAYUNO
+        // ahora traigo las etiquetas p del html para ahi colocar los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosDesayuno = document.getElementById("pAlimentosDesayunoSubirPeso");
+        // necesito colocar en una sola String todos los nombres
+        // creo una variable de String
+        let mostrarNombresAlimentosDesayuno = "";
+        // hago un for each que vaya pasandole los nombres del item asignando esa constante al string
+        listaAlimentosDesayunoAgregadosUsuarioSubirPeso.forEach(item => {
+            mostrarNombresAlimentosDesayuno += " "+item.nombre + "--";
+        })
+        pAlimentosDesayuno.textContent = (`Tus alimentos de desayuno son: ${mostrarNombresAlimentosDesayuno}`)
+
+
+        // MOSTRAR LISTA MEDIA MAÑANA
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosMediaMañana = document.getElementById("pAlimentosMediaMañanaSubirPeso");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosMediaMañana = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de MediaMañana y agregar los nombres a la cadena
+        listaAlimentosMediaMañanaAgregadosUsuarioSubirPeso.forEach(item => {
+            mostrarNombresAlimentosMediaMañana += " "+item.nombre + "--";
+        });
+
+        pAlimentosMediaMañana.textContent = `Tus alimentos de media mañana son: ${mostrarNombresAlimentosMediaMañana}`;
+
+        // MOSTRAR LISTA ALMUERZO
+
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosAlmuerzo = document.getElementById("pAlimentosAlmuerzoSubirPeso");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosAlmuerzo = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de Almuerzo y agregar los nombres a la cadena
+        listaAlimentosAlmuerzoAgregadosUsuarioSubirPeso.forEach(item => {
+            mostrarNombresAlimentosAlmuerzo += " "+item.nombre + "--";
+        });
+        pAlimentosAlmuerzo.textContent = `Tus alimentos de almuerzo son: ${mostrarNombresAlimentosAlmuerzo}`;
+
+        // MOSTRAR LISTA MEDIA TARDE
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosMediaTarde = document.getElementById("pAlimentosMediaTardeSubirPeso");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosMediaTarde = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de MediaTarde y agregar los nombres a la cadena
+        listaAlimentosMediaTardeAgregadosUsuarioSubirPeso.forEach(item => {
+            mostrarNombresAlimentosMediaTarde += " "+item.nombre + "--";
+        });
+        pAlimentosMediaTarde.textContent = `Tus alimentos de media tarde son: ${mostrarNombresAlimentosMediaTarde}`;
+
+
+         // MOSTRAR LISTA CENA
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosCena = document.getElementById("pAlimentosCenaSubirPeso");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosCena = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de Cena y agregar los nombres a la cadena
+        listaAlimentosCenaAgregadosUsuarioSubirPeso.forEach(item => {
+            mostrarNombresAlimentosCena += " "+item.nombre + "--";
+        });
+        pAlimentosCena.textContent = `Tus alimentos de cena son: ${mostrarNombresAlimentosCena}`;
+    })
+
+// if de subir peso
 }

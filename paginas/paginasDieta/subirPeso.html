@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles.css">
+    <title>SubirPeso</title>
+</head>
+
+<body>
+    <main>
+        <div class="titulo">
+            <div class="partetitulo">
+                <h1>Dieta para subir de peso</h1>
+                <p id="deficitCaloricoSubirPeso">---</p>
+            </div>
+            <div class="partetitulo">
+                <h2>Las calorias que consumiras por dia serán:</h2>
+                <p id="caloriasConsumirDietaSubirPeso">---</p>
+            </div>
+        </div>
+        <div class="titulo">
+            <div class="partetitulo">
+                <h2>Vamos a diseñar tu dieta:</h2>
+                <h3>Desayuno</h3>
+                <div class="formularioAlimentos">
+                    <form class="cajaformulario" id="formularioDesayunoSubirPeso">
+                        <label for="preguntaOpcionesDesayunoSubirPeso">Selecciona y ve enviando uno a uno los alimentos que
+                            desees consumir</label>
+                        <label for="preguntaOpcionesDesayunoSubirPeso">Por ejemplo: Selecciona 1 harina, 2 proteinas y 1 grasa
+                            para tu desayuno</label>
+                        <select id="preguntaOpcionesDesayunoSubirPeso" name="preguntaOpcionesDesayunoSubirPeso">
+                            <option value="1 Pan Integral (Harina)">1 Pan Integral (Harina)</option>
+                            <option value="1 Tortilla de harina (Harina)">1 Tortilla de harina (Harina)</option>
+                            <option value="Arepas de maiz (Harina)">Arepas de maiz (Harina)</option>
+                            <option value="Huevos (Proteinas)">Huevos (Proteinas) </option>
+                            <option value="Yogurt griego (Proteinas)">Yogurt griego (Proteinas)</option>
+                            <option value="tofu (Proteinas)">tofu (Proteinas) </option>
+                            <option value="Frutos secos (Proteinas)">Frutos secos (Proteinas) </option>
+                            <option value="Leche de vaca (Proteinas)">Leche de vaca (Proteinas) </option>
+                            <option value="Leche de soya (Proteinas)">Leche de soya (Proteinas) </option>
+                            <option value="aceite de oliva (Grasa)">aceite de oliva (Grasa) </option>
+                            <option value="aguacate (Grasa)">aguacate (Grasa) </option>
+                        </select><br><br>
+                        <input id="botonAlimentosDesayunoSubirPeso" type="submit" value="Enviar alimento">
+                    </form>
+                </div>
+            </div>
+            <div class="partetitulo">
+                <h3>Media mañana</h3>
+                <div class="formularioAlimentos">
+                    <form class="cajaformulario" id="formularioMediaMañanaSubirPeso">
+                        <label for="preguntaOpcionesMediaMañanaSubirPeso">Selecciona y ve enviando uno a uno los alimentos que
+                            desees consumir</label>
+                        <label for="preguntaOpcionesMediaMañanaSubirPeso">Por ejemplo: Selecciona 1 harina, 1 proteinas y 1 fruta
+                            para tu media mañana</label>
+                        <select id="preguntaOpcionesMediaMañanaSubirPeso" name="preguntaOpcionesMediaMañanaSubirPeso">
+                            <option value="1 Pan Integral (Harina)">1 Pan Integral (Harina)</option>
+                            <option value="3 Galletas Integrales">Galletas Integrales (Harina)</option>
+                            <option value="Porción de Fruta">Porción de Fruta (Fruta)</option>
+                            <option value="Yogurt Griego">Yogurt Griego (Proteina)</option>
+                            <option value="Frutos Secos">Frutos Secos (Proteina)</option>
+                        </select><br><br>
+                        <input id="botonAlimentosMediaMañanaSubirPeso" type="submit" value="Enviar alimento">
+                    </form>
+                </div>
+            </div>
+            <div class="partetitulo">
+                <h3>Almuerzo</h3>
+                <div class="formularioAlimentos">
+                    <form class="cajaformulario" id="formularioAlmuerzoSubirPeso">
+                        <label for="preguntaOpcionesAlmuerzoSubirPeso">Selecciona y ve enviando uno a uno los alimentos que desees consumir</label>
+                        <label for="preguntaOpcionesAlmuerzoSubirPeso">Por ejemplo: Selecciona 2 harina, 1 proteína y 2 vegetales para tu almuerzo</label>
+                        <select id="preguntaOpcionesAlmuerzoSubirPeso" name="preguntaOpcionesAlmuerzoSubirPeso">
+                            <option value="Porción de Pollo">Porción de Pollo (Proteína)</option>
+                            <option value="Porción de Carne de Res">Porción de Carne de Res (Proteína)</option>
+                            <option value="Porción de Carne de Cerdo">Porción de Carne de Cerdo (Proteína)</option>
+                            <option value="Porción de Tofu">Porción de Tofu (Proteína)</option>
+                            <option value="Porción de Proteína de Soya">Porción de Proteína de Soya (Proteína)</option>
+                            <option value="Porción de Salmón">Porción de Salmón (Proteína)</option>
+                            <option value="Porción de Papa Asada">Porción de Papa Asada (Harina)</option>
+                            <option value="Porción de Arroz">Porción de Arroz (Harina)</option>
+                            <option value="Sopa de Avena">Sopa de Avena (Harina)</option>
+                            <option value="Sopa de Maíz">Sopa de Maíz (Harina)</option>
+                            <option value="Porción de Plátanos Fritos">Porción de Plátanos Fritos (Harina)</option>
+                            <option value="Porción de Pasta">Porción de Pasta (Harina)</option>
+                            <option value="Porción de Ensalada de Lechuga con Zanahoria">Porción de Ensalada de Lechuga con Zanahoria (Vegetal)</option>
+                            <option value="Porción de Ensalada de Tomate con Cebolla">Porción de Ensalada de Tomate con Cebolla (Vegetal)</option>
+                            <option value="Porción de Lentejas">Porción de Lentejas (Vegetal)</option>
+                            <option value="Porción de Ensalada Mixta">Porción de Ensalada Mixta (Vegetal)</option>
+                        </select><br><br>
+                        <input id="botonAlimentosAlmuerzoSubirPeso" type="submit" value="Enviar alimento">
+                    </form>
+                </div>
+            </div>
+            <div class="partetitulo">
+                <h3>Media tarde</h3>
+                <div class="formularioAlimentos">
+                    <form class="cajaformulario" id="formularioMediaTardeSubirPeso">
+                        <label for="preguntaOpcionesMediaTardeSubirPeso">Selecciona y ve enviando uno a uno los alimentos que
+                            desees consumir</label>
+                        <label for="preguntaOpcionesMediaTardeSubirPeso">Por ejemplo: Selecciona 1 harina, 1 proteína y 1 fruta
+                            para tu media tarde</label>
+                        <select id="preguntaOpcionesMediaTardeSubirPeso" name="preguntaOpcionesMediaTardeSubirPeso">
+                            <option value="Pan Integral">1 Pan Integral (Harina)</option>
+                            <option value="Galletas Integrales">3 Galletas Integrales (Harina)</option>
+                            <option value="Porción de Fruta">Porción de Fruta (Fruta)</option>
+                            <option value="Yogurt Griego">Yogurt Griego (Proteína)</option>
+                            <option value="Frutos Secos">Frutos Secos (Proteína)</option>
+                            <option value="Cuajada">Cuajada (Proteína)</option>
+                            <option value="Leche de Soya">Leche de Soya (Proteína)</option>
+                        </select><br><br>
+                        <input id="botonAlimentosMediaTardeSubirPeso" type="submit" value="Enviar alimento">
+                    </form>
+                </div>
+            </div>
+            <div class="partetitulo">
+                <h3>Cena</h3>
+                <div class="formularioAlimentos">
+                    <form class="cajaformulario" id="formularioCenaSubirPeso">
+                        <label for="preguntaOpcionesCenaSubirPeso">Selecciona y ve enviando uno a uno los alimentos que desees consumir</label>
+                        <label for="preguntaOpcionesCenaSubirPeso">Por ejemplo: Selecciona 1 harina, 2 proteína y 2 vegetales para tu cena</label>
+                        <select id="preguntaOpcionesCenaSubirPeso" name="preguntaOpcionesCena">
+                            <option value="Porción de Pollo">Porción de Pollo (Proteína)</option>
+                            <option value="Porción de Carne de Res">Porción de Carne de Res (Proteína)</option>
+                            <option value="Porción de Carne de Cerdo">Porción de Carne de Cerdo (Proteína)</option>
+                            <option value="Porción de Tofu">Porción de Tofu (Proteína)</option>
+                            <option value="Porción de Proteína de Soya">Porción de Proteína de Soya (Proteína)</option>
+                            <option value="Porción de Salmón">Porción de Salmón (Proteína)</option>
+                            <option value="Porción de Papa Asada">Porción de Papa Asada (Harina)</option>
+                            <option value="Porción de Arroz">Porción de Arroz (Harina)</option>
+                            <option value="Sopa de Avena">Sopa de Avena (Harina)</option>
+                            <option value="Sopa de Maíz">Sopa de Maíz (Harina)</option>
+                            <option value="Porción de Plátanos Fritos">Porción de Plátanos Fritos (Harina)</option>
+                            <option value="Porción de Pasta">Porción de Pasta (Harina)</option>
+                            <option value="Porción de Ensalada de Lechuga con Zanahoria">Porción de Ensalada de Lechuga con Zanahoria (Vegetal)</option>
+                            <option value="Porción de Ensalada de Tomate con Cebolla">Porción de Ensalada de Tomate con Cebolla (Vegetal)</option>
+                            <option value="Porción de Lentejas">Porción de Lentejas (Vegetal)</option>
+                            <option value="Porción de Ensalada Mixta">Porción de Ensalada Mixta (Vegetal)</option>
+                        </select><br><br>
+                        <input id="botonAlimentosCenaSubirPeso" type="submit" value="Enviar alimento">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="partetitulo">
+            <input id="botonMostrarDietaSubirPeso" type="submit" value="Mostrar Dieta">
+        </div>
+        <div class="titulo oculto" id="divMostrarDietaSubirPeso">
+            <div class="partetitulo">
+                <h2>Tu dieta es la siguiente:</h2>
+                <h3>Desayuno</h3>
+                <p id="pAlimentosDesayunoSubirPeso">---</p>
+                <h3>Media Mañana</h3>
+                <p id="pAlimentosMediaMañanaSubirPeso">---</p>
+                <h3>Almuerzo</h3>
+                <p id="pAlimentosAlmuerzoSubirPeso">---</p>
+                <h3>Media Tarde</h3>
+                <p id="pAlimentosMediaTardeSubirPeso">---</p>
+                <h3>Cena</h3>
+                <p id="pAlimentosCenaSubirPeso">---</p>                
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Programa hecho por Oscar Agreda: <a href="https://www.linkedin.com/in/oscar-ortiz-597179172/">Perfil de
+                LinkedIn</a></p>
+    </footer>
+    <script src="../../main.js"></script>
+</body>
+</html>
