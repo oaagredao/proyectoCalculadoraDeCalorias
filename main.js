@@ -743,21 +743,74 @@ else if (document.title === "bajarPeso") {
         // remover la clase "oculta"
         divMostrarDieta.classList.remove("oculto");
 
+
+        // MOSTRAR LISTA DESAYUNO
+
         // ahora traigo las etiquetas p del html para ahi colocar los nombres de los alimentos seleccionados por el usuario
-        const pAlimentosDesayuno=document.getElementById("pAlimentosDesayuno");
-        
+        const pAlimentosDesayuno = document.getElementById("pAlimentosDesayuno");
+        // necesito colocar en una sola String todos los nombres
+        // creo una variable de String
+        let mostrarNombresAlimentosDesayuno = "";
+        // hago un for each que vaya pasandole los nombres del item asignando esa constante al string
+        listaAlimentosDesayunoAgregadosUsuario.forEach(item => {
+            mostrarNombresAlimentosDesayuno += " "+item.nombre + "--";
+        })
+        pAlimentosDesayuno.textContent = (`Tus alimentos de desayuno son: ${mostrarNombresAlimentosDesayuno}`)
 
-        pAlimentosDesayuno.textContent=(`Tus alimentos de desayuno son: `)
 
-      
+        // MOSTRAR LISTA MEDIA MAÑANA
+
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosMediaMañana = document.getElementById("pAlimentosMediaMañana");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosMediaMañana = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de MediaMañana y agregar los nombres a la cadena
+        listaAlimentosMediaMañanaAgregadosUsuario.forEach(item => {
+            mostrarNombresAlimentosMediaMañana += " "+item.nombre + "--";
+        });
+
+        pAlimentosMediaMañana.textContent = `Tus alimentos de media mañana son: ${mostrarNombresAlimentosMediaMañana}`;
+
+
+        // MOSTRAR LISTA ALMUERZO
+
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosAlmuerzo = document.getElementById("pAlimentosAlmuerzo");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosAlmuerzo = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de Almuerzo y agregar los nombres a la cadena
+        listaAlimentosAlmuerzoAgregadosUsuario.forEach(item => {
+            mostrarNombresAlimentosAlmuerzo += " "+item.nombre + "--";
+        });
+        pAlimentosAlmuerzo.textContent = `Tus alimentos de almuerzo son: ${mostrarNombresAlimentosAlmuerzo}`;
+
+
+        // MOSTRAR LISTA MEDIA TARDE
+
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosMediaTarde = document.getElementById("pAlimentosMediaTarde");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosMediaTarde = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de MediaTarde y agregar los nombres a la cadena
+        listaAlimentosMediaTardeAgregadosUsuario.forEach(item => {
+            mostrarNombresAlimentosMediaTarde += " "+item.nombre + "--";
+        });
+        pAlimentosMediaTarde.textContent = `Tus alimentos de media tarde son: ${mostrarNombresAlimentosMediaTarde}`;
+
+
+        // MOSTRAR LISTA CENA
+
+        // Ahora traigo las etiquetas <p> del HTML para colocar allí los nombres de los alimentos seleccionados por el usuario
+        const pAlimentosCena = document.getElementById("pAlimentosCena");
+        // Necesito colocar todos los nombres en una sola cadena
+        let mostrarNombresAlimentosCena = "";
+        // Utilizo un bucle forEach para recorrer los elementos de la lista de alimentos de Cena y agregar los nombres a la cadena
+        listaAlimentosCenaAgregadosUsuario.forEach(item => {
+            mostrarNombresAlimentosCena += " "+item.nombre + "--";
+        });
+        pAlimentosCena.textContent = `Tus alimentos de cena son: ${mostrarNombresAlimentosCena}`;
+
 
     })
-
-
-
-
-
-
-
     // este es el if de pagina bajar peso
 }
