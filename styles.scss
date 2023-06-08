@@ -1,13 +1,32 @@
 body {
-    background-color: #FFE5D4;
+    background: linear-gradient(to top, #FAD2E1 65%, #FFFFFF);
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
   
   a {
     text-decoration: none;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    :focus {
+      outline: none;
+      box-shadow: 0 0 5px #ccc;
+    }
   }
   
   button{
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-align: center;
+    :focus {
+      outline: none;
+      box-shadow: 0 0 5px #ccc;
+    }
     a{
       text-decoration: none;
     }
@@ -17,6 +36,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    min-height: 670px;
   }
   
   main section p {
@@ -24,7 +44,6 @@ body {
   }
   
   main .section1 {
-    background-color: #FAD2E1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +54,6 @@ body {
   }
   
   main .section2 {
-    background-color: #FAD2E1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,18 +64,17 @@ body {
   }
   
   main .formulario {
-    background-color: #FAD2E1;
+    background: linear-gradient(to bottom, #FAD2E1 65%, #FFFFFF);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
     margin: 25px;
-    height: 550px;
+    height: 785px;
     width: 500px;
   }
   main .formularioAlimentos {
-    background-color: #FAD2E1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,11 +83,12 @@ body {
     border: 1px solid black;
     border-radius: 1px;
     margin: 10px;
-    height: 220px;
+    height: 250px;
+    width: 600px;
   }
   
   main form * {
-    margin: 0;
+    margin: 5px;
   }
   
   main form {
@@ -81,20 +99,40 @@ body {
   }
   
   .titulo {
-    background-color: #FAD2E1;
     width: 40%;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
   }
   
   .titulo .partetitulo {
-    background-color: #FAD2E1;
     width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+  }
+  // div que contiene a los divs del main para organizarlos en row
+  .tituloVersion2{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+
+  }
+  // div para agregar color y estilos a los objetos del index
+  .divIndex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+    height: 400px;
+    width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
   .btn {
@@ -109,4 +147,44 @@ body {
     cursor: pointer;
     
   }
-  
+  input,select{
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-align: center;
+    :focus {
+      outline: none;
+      box-shadow: 0 0 5px #ccc;
+    }
+  }
+  // modifico el parrafo que muestra las calorias en la pagina recoleccion datos
+  #gastocalorico {
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    width: 100px;
+    height: 15px;
+    text-align: center;
+  }
+  // creo la clase oculto
+  .oculto{
+    display: none;
+  }
+  // modifico al input de mostrar dieta para que tenga margin
+  #botonMostrarDieta,#botonMostrarDietaSubirPeso{
+    margin-top: 100px;
+    margin-bottom: 50px;
+    width: 160px;
+    height: 45px;
+    font-size: 20px;
+  }
+  // modifico el div que muestra dieta en subir y bajar peso
+  #divMostrarDieta,#divMostrarDietaSubirPeso{
+    background: linear-gradient(to top, #FAD2E1 65%, #FFFFFF);
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+
+  }
